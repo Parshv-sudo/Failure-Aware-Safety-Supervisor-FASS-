@@ -1,0 +1,47 @@
+# Visual Studio Code
+.vscode/
+.history/
+
+# Environment
+.env
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+env.bak/
+venv.bak/
+
+# Logs and checkpoints
+*.log
+PythonAPI/fass_checkpoints/
+PythonAPI/fass_logs/
+PythonAPI/fass_ml/training/_fass_experience_buffer.pt
+PythonAPI/fass_ml/demo/_fass_experience_buffer.pt
+_fass_experience_buffer.pt
+
+# Ignore CARLA Engine and large binaries
+# We only want to track the FASS project code!
+CARLAUE4/
+Engine/
+WindowsNoEditor/
+*.exe
+*.dll
+*.pdb
+*.pak
+*.bin
+*.so
+
+# Allow tracking PythonAPI since our project is there
+!PythonAPI/
+PythonAPI/util/
+PythonAPI/carla/
+PythonAPI/examples/
+
+# Mac OS
+.DS_Store
