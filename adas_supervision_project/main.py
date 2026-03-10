@@ -148,7 +148,11 @@ def main():
     # Map
     map_cfg = cfg.get("map", default={})
     if args.map:
-        map_cfg["name"] = args.map
+        if args.map.endswith('.osm') or args.map.endswith('.xodr'):
+            map_cfg["type"] = "real_world"
+            map_cfg["source"] = args.map
+        else:
+            map_cfg["name"] = args.map
         
     def _on_world_loaded(w):
         if carla_cfg.get("synchronous_mode", True):

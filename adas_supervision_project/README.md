@@ -79,12 +79,15 @@
 
 ### How It Works
 
-1. Place a `.osm` file in `maps/` (or reference any path in config).
+1. Download a real-world map region using the provided utility script. You will need the bounding box coordinates (min_lon, min_lat, max_lon, max_lat).
+   ```powershell
+   python utils/fetch_osm_map.py -b -74.0135,40.7107,-74.0041,40.7183 -o maps/nyc_test.osm
+   ```
 2. Set config:
    ```yaml
    map:
      type: real_world
-     source: "maps/sample_region.osm"
+     source: "maps/nyc_test.osm"
    ```
 3. The pipeline: **OSM XML → `carla.Osm2Odr.convert()` → OpenDRIVE → `client.generate_opendrive_world()`**
 4. If the OSM file is missing or conversion fails, the system falls back to `fallback_town` (e.g. `Town03`).

@@ -14,6 +14,10 @@ carla:
 # Map Configuration
 # ---------------------------------------------------------------------------
 map:
+  # To use a real world map:
+  # 1. Run `python utils/fetch_osm_map.py -b MIN_LON,MIN_LAT,MAX_LON,MAX_LAT -o maps/my_map.osm`
+  # 2. Change `type` to "real_world"
+  # 3. Change `source` to "maps/my_map.osm"
   type: "default"                    # "default" or "real_world"
   source: "maps/sample_region.osm"   # OSM file path (used if type=real_world)
   fallback_town: "Town03"            # CARLA town if type=default or OSM fails
@@ -22,6 +26,13 @@ map:
     traffic_lights: true
     all_junctions_lights: false
     center_map: true
+  visual_settings:
+    vertex_distance: 2.0             # Distance between vertices (smaller = smoother but heavier)
+    max_road_length: 50.0            # Max length of a single road mesh segment
+    wall_height: 1.0                 # Height of walls generated on road borders
+    additional_width: 0.6            # Extra width applied to lanes
+    smooth_junctions: true           # Enable junction smoothing
+    enable_mesh_visibility: true     # Generate standard rendering meshes
 
 # ---------------------------------------------------------------------------
 # Deterministic Reproducibility

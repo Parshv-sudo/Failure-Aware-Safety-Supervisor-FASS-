@@ -75,7 +75,24 @@ class MapManager:
             xodr_data = converter.convert(osm_data)
 
             logger.info("Loading OpenDRIVE world from converted OSM data…")
-            return self.client.generate_opendrive_world(xodr_data)
+            world = self.client.generate_opendrive_world(xodr_data)
+            
+            # Procedurally paint lane lines if enabled
+            if self._cfg.get("visual_settings", {}).get("paint_lane_lines", True):
+                from utils.lane_painter import LanePainter
+                painter = LanePainter(world, config=self._cfg.get("visual_settings", {}))
+                painter.paint_lines()
+                
+            return world
+            
+            # Procedurally paint lane lines if enabled
+            if self._cfg.get("visual_settings", {}).get("paint_lane_lines", True):
+                from utils.lane_painter import LanePainter
+                painter = LanePainter(world, config=self._cfg.get("visual_settings", {}))
+                painter.paint_lines()
+                
+            return world
+            
         except Exception as exc:
             logger.error("Real-world map load failed: %s — falling back.", exc)
             return self._load_default_town()

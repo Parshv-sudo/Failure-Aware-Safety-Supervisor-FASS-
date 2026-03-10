@@ -1,0 +1,17 @@
+{
+  "simulation_id": "725536d9cd394151",
+  "scenario_name": "highway_cut_in",
+  "seed_values": {
+    "random_seed": 42,
+    "traffic_seed": 42
+  },
+  "map_type": "real_world",
+  "episode_outcome": "safe",
+  "false_takeover_count": 0,
+  "missed_hazard_count": 0,
+  "min_ttc_observed": 2.2763,
+  "takeover_active_duration_s": 0.0,
+  "reaction_latency_distribution": {},
+  "max_risk_score": 0.244988,
+  "collision_count": 0
+}
