@@ -1,0 +1,9 @@
+{"timestamp": "2026-03-04T04:14:02.398033+00:00", "event_type": "state_change", "data": {"from": "INITIALIZING", "to": "RUNNING"}}
+{"timestamp": "2026-03-04T04:14:06.741138+00:00", "event_type": "state_change", "data": {"from": "RUNNING", "to": "TAKEOVER_ACTIVE"}}
+{"timestamp": "2026-03-04T04:14:06.763056+00:00", "event_type": "state_change", "data": {"from": "TAKEOVER_ACTIVE", "to": "RUNNING"}}
+{"timestamp": "2026-03-04T04:14:06.793271+00:00", "event_type": "state_change", "data": {"from": "RUNNING", "to": "TAKEOVER_ACTIVE"}}
+{"timestamp": "2026-03-04T04:14:06.817969+00:00", "event_type": "state_change", "data": {"from": "TAKEOVER_ACTIVE", "to": "RUNNING"}}
+{"timestamp": "2026-03-04T04:14:06.894533+00:00", "event_type": "state_change", "data": {"from": "RUNNING", "to": "TAKEOVER_ACTIVE"}}
+{"timestamp": "2026-03-04T04:14:06.921203+00:00", "event_type": "state_change", "data": {"from": "TAKEOVER_ACTIVE", "to": "RUNNING"}}
+{"timestamp": "2026-03-04T04:14:06.945514+00:00", "event_type": "state_change", "data": {"from": "RUNNING", "to": "TAKEOVER_ACTIVE"}}
+{"timestamp": "2026-03-04T04:14:06.972007+00:00", "event_type": "state_change", "data": {"from": "TAKEOVER_ACTIVE", "to": "RUNNING"}}

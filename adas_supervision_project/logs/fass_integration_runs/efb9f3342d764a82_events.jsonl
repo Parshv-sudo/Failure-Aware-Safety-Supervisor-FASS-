@@ -1,0 +1,2 @@
+{"timestamp": "2026-03-02T05:45:02.654836+00:00", "event_type": "state_change", "data": {"from": "INITIALIZING", "to": "RUNNING"}}
+{"timestamp": "2026-03-02T05:48:05.231993+00:00", "event_type": "state_change", "data": {"from": "RUNNING", "to": "TERMINATED"}}

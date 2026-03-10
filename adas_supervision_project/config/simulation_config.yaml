@@ -1,0 +1,153 @@
+# =============================================================================
+# ADAS Level 2 Supervision & Takeover Management Framework
+# Simulation Configuration
+# =============================================================================
+
+carla:
+  host: "localhost"
+  port: 2000
+  timeout: 30.0
+  synchronous_mode: true
+  fixed_delta_seconds: 0.05  # 20 Hz
+
+# ---------------------------------------------------------------------------
+# Map Configuration
+# ---------------------------------------------------------------------------
+map:
+  type: "default"                    # "default" or "real_world"
+  source: "maps/sample_region.osm"   # OSM file path (used if type=real_world)
+  fallback_town: "Town03"            # CARLA town if type=default or OSM fails
+  osm_settings:
+    lane_width: 6.0
+    traffic_lights: true
+    all_junctions_lights: false
+    center_map: true
+
+# ---------------------------------------------------------------------------
+# Deterministic Reproducibility
+# ---------------------------------------------------------------------------
+seeds:
+  random_seed: 42
+  traffic_seed: 42
+
+# ---------------------------------------------------------------------------
+# Vehicle
+# ---------------------------------------------------------------------------
+vehicle:
+  blueprint_filter: "vehicle.tesla.model3"
+  spawn_index: 0                     # Index into map spawn points (seed-based)
+
+# ---------------------------------------------------------------------------
+# Sensors
+# ---------------------------------------------------------------------------
+sensors:
+  rgb_camera:
+    image_size_x: 800
+    image_size_y: 600
+    fov: 90
+    position: { x: 1.5, y: 0.0, z: 2.4 }
+  collision:
+    enabled: true
+  lane_invasion:
+    enabled: true
+  imu:
+    enabled: true
+
+# ---------------------------------------------------------------------------
+# Perception
+# ---------------------------------------------------------------------------
+perception:
+  detection_range: 50.0              # meters
+  noise_std: 0.5                     # Gaussian noise on distance (meters)
+  occlusion_probability: 0.05        # per-object probability of occlusion
+  confidence_decay_rate: 0.02        # per-tick decay
+  misclassification_probability: 0.01
+
+# ---------------------------------------------------------------------------
+# Risk Assessment
+# ---------------------------------------------------------------------------
+risk:
+  epsilon: 0.1                       # TTC floor to prevent 1/0
+  speed_max: 40.0                    # m/s — for normalizing speed term to [0,1]
+  weights:
+    w1_confidence: 0.30
+    w2_ttc: 0.35
+    w3_speed: 0.15
+    w4_complexity: 0.20
+
+# ---------------------------------------------------------------------------
+# Road Complexity (ODD Monitor)
+# ---------------------------------------------------------------------------
+road_complexity:
+  curvature_weight: 0.35
+  intersection_weight: 0.30
+  lane_width_weight: 0.15
+  speed_limit_weight: 0.20
+  nominal_lane_width: 3.5            # meters
+  curvature_max: 0.05                # 1/m — for normalization
+  intersection_range: 50.0           # meters — proximity lookout
+
+# ---------------------------------------------------------------------------
+# Takeover Manager
+# ---------------------------------------------------------------------------
+takeover:
+  thresholds:
+    stage_1_warning: 0.4
+    stage_2_speed_reduction: 0.6
+    stage_3_takeover_request: 0.75
+    stage_4_emergency_braking: 0.9
+  speed_reduction_rate: 2.0          # m/s² deceleration
+
+# ---------------------------------------------------------------------------
+# Driver Response Model
+# ---------------------------------------------------------------------------
+driver_response:
+  distribution: "lognormal"          # "gaussian" or "lognormal"
+  stage_params:
+    stage_1: { mean: 3.5, std: 0.8 }
+    stage_2: { mean: 2.5, std: 0.6 }
+    stage_3: { mean: 1.5, std: 0.4 }
+    stage_4: { mean: 0.5, std: 0.2 }
+  hazard_coupling:
+    complexity_alpha: 0.3
+    speed_beta: 0.2
+    alert_urgency_factors:
+      stage_1: 0.7
+      stage_2: 0.85
+      stage_3: 1.0
+      stage_4: 1.2
+
+# ---------------------------------------------------------------------------
+# Overtrust Simulation
+# ---------------------------------------------------------------------------
+overtrust:
+  enabled: true
+  driver_attention_initial: 0.95
+  attention_decay_rate: 0.005        # per-tick decay
+  attention_recovery_on_alert: 0.3   # additive recovery
+  attention_epsilon: 0.05            # floor for division safety
+
+# ---------------------------------------------------------------------------
+# Metrics
+# ---------------------------------------------------------------------------
+metrics:
+  hazard_ttc_threshold: 2.0          # seconds
+  consecutive_tick_requirement: 5
+  safety_ttc_threshold: 4.0          # seconds — for false-takeover detection
+
+# ---------------------------------------------------------------------------
+# Logging
+# ---------------------------------------------------------------------------
+logging:
+  output_dir: "logs"
+  log_every_n_ticks: 1               # 1 = every tick, 2 = every other tick
+  console_log_level: "INFO"
+
+# ---------------------------------------------------------------------------
+# Scenario
+# ---------------------------------------------------------------------------
+scenario:
+  active: "highway_cut_in"           # or "pedestrian_crossing", "sharp_curve_low_visibility"
+  duration_seconds: 60
+  traffic_vehicles: 10
+  weather: "ClearNoon"               # Deterministic weather preset

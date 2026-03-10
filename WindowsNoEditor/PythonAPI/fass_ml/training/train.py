@@ -39,8 +39,9 @@ def _create_synthetic_data(n_samples: int = 2000, seed: int = 42):
     """
     rng = np.random.RandomState(seed)
 
-    features = rng.randn(n_samples, 35).astype(np.float32) * 0.3 + 0.5
-    features = np.clip(features, 0, 1)
+    # Use a Uniform distribution to force the model to actually learn the mapping
+    # over the entire domain instead of clustering and guessing the mean (0.5).
+    features = rng.uniform(0.0, 1.0, size=(n_samples, 35)).astype(np.float32)
 
     # Generate correlated risk labels
     # Risk correlates with: close objects (feat 0 low), low TTC (feat 1 low),
@@ -53,6 +54,27 @@ def _create_synthetic_data(n_samples: int = 2000, seed: int = 42):
         features[:, 21] * 0.2               # high speed
     )
     risk = np.clip(risk + rng.randn(n_samples) * 0.05, 0, 1).astype(np.float32)
+    
+    # Inject 15% explicitly SAFE / EMPTY frames to anchor the baseline
+    n_safe = int(n_samples * 0.15)
+    features[:n_safe, :] = 0.0
+    features[:n_safe, 0] = 1.0 # max distance
+    features[:n_safe, 1] = 1.0 # max TTC
+    features[:n_safe, 5] = 1.0 # high confidence
+    features[:n_safe, 6] = 1.0 # high confidence
+    features[:n_safe, 11] = 1.0 # sensor health
+    features[:n_safe, 12] = 1.0 # sensor health
+    features[:n_safe, 13] = 1.0 # sensor health
+    features[:n_safe, 32] = 1.0 # stationary
+    
+    # Symmetrically normalized features (0.5 means 0 raw value)
+    features[:n_safe, 17] = 0.5 # flat sun altitude
+    features[:n_safe, 23] = 0.5 # 0 yaw rate
+    features[:n_safe, 30] = 0.5 # 0 pitch
+    features[:n_safe, 31] = 0.5 # 0 roll
+    features[:n_safe, 34] = 0.5 # 0 altitude change
+
+    risk[:n_safe] = rng.uniform(0.01, 0.08, n_safe).astype(np.float32) # Anchor at 0.05 base risk
 
     return features, risk
 

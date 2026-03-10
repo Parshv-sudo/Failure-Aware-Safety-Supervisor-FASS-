@@ -1,0 +1,22 @@
+{
+  "simulation_id": "de4627b504aa4b44",
+  "scenario_name": "highway_cut_in",
+  "seed_values": {},
+  "map_type": "town",
+  "episode_outcome": "manual_override",
+  "false_takeover_count": 0,
+  "missed_hazard_count": 0,
+  "min_ttc_observed": 3.3492,
+  "takeover_active_duration_s": 10.45,
+  "reaction_latency_distribution": {
+    "count": 210,
+    "mean": 1.8533,
+    "std": 0.0459,
+    "min": 1.8454,
+    "max": 2.1205,
+    "p50": 1.8454,
+    "p95": 1.8454
+  },
+  "max_risk_score": 0.619003,
+  "collision_count": 0
+}

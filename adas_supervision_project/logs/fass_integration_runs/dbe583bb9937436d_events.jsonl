@@ -1,0 +1,7 @@
+{"timestamp": "2026-03-02T04:49:58.061395+00:00", "event_type": "state_change", "data": {"from": "INITIALIZING", "to": "RUNNING"}}
+{"timestamp": "2026-03-02T04:50:12.391855+00:00", "event_type": "state_change", "data": {"from": "RUNNING", "to": "TAKEOVER_ACTIVE"}}
+{"timestamp": "2026-03-02T04:50:12.439897+00:00", "event_type": "state_change", "data": {"from": "TAKEOVER_ACTIVE", "to": "RUNNING"}}
+{"timestamp": "2026-03-02T04:50:12.483463+00:00", "event_type": "state_change", "data": {"from": "RUNNING", "to": "TAKEOVER_ACTIVE"}}
+{"timestamp": "2026-03-02T04:50:13.597593+00:00", "event_type": "state_change", "data": {"from": "TAKEOVER_ACTIVE", "to": "FALLBACK_BRAKING"}}
+{"timestamp": "2026-03-02T04:50:14.058235+00:00", "event_type": "state_change", "data": {"from": "FALLBACK_BRAKING", "to": "RUNNING"}}
+{"timestamp": "2026-03-02T04:50:41.128851+00:00", "event_type": "state_change", "data": {"from": "RUNNING", "to": "TERMINATED"}}

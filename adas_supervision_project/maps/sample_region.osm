@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 
+  Sample OpenStreetMap region for the ADAS Supervision Framework.
+  This is a minimal valid OSM file with a small road network
+  suitable for demonstrating the OSM → OpenDRIVE pipeline.
+-->
+<osm version='0.6' generator='adas_supervision_project'>
+  <bounds minlat="48.8580" minlon="2.2940" maxlat="48.8620" maxlon="2.2990"/>
+
+  <!-- Nodes -->
+  <node id="1" lat="48.8584" lon="2.2945" />
+  <node id="2" lat="48.8590" lon="2.2955" />
+  <node id="3" lat="48.8600" lon="2.2960" />
+  <node id="4" lat="48.8610" lon="2.2970" />
+  <node id="5" lat="48.8605" lon="2.2950" />
+  <node id="6" lat="48.8595" lon="2.2980" />
+
+  <!-- Main road -->
+  <way id="100">
+    <nd ref="1"/>
+    <nd ref="2"/>
+    <nd ref="3"/>
+    <nd ref="4"/>
+    <tag k="highway" v="residential"/>
+    <tag k="name" v="Rue de l'Exemple"/>
+    <tag k="lanes" v="2"/>
+  </way>
+
+  <!-- Side road (creates an intersection at node 3) -->
+  <way id="101">
+    <nd ref="5"/>
+    <nd ref="3"/>
+    <nd ref="6"/>
+    <tag k="highway" v="tertiary"/>
+    <tag k="name" v="Rue Latérale"/>
+    <tag k="lanes" v="1"/>
+  </way>
+</osm>

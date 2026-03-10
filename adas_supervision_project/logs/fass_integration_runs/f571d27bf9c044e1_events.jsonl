@@ -1,0 +1,3 @@
+{"timestamp": "2026-03-01T11:36:56.152186+00:00", "event_type": "state_change", "data": {"from": "INITIALIZING", "to": "RUNNING"}}
+{"timestamp": "2026-03-01T11:36:56.948709+00:00", "event_type": "state_change", "data": {"from": "RUNNING", "to": "TAKEOVER_ACTIVE"}}
+{"timestamp": "2026-03-01T11:38:18.845575+00:00", "event_type": "state_change", "data": {"from": "TAKEOVER_ACTIVE", "to": "TERMINATED"}}

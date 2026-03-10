@@ -1,0 +1,26 @@
+# FASS ML Empty Integration Test Configuration
+
+experiment_name: "FASS_Empty_Test"
+carla:
+  host: "127.0.0.1"
+  port: 2000
+  timeout: 10.0
+
+map:
+  type: "town"
+  name: "Town04"  # Default fallback if real-world fails
+
+supervision:
+  risk_model: "fass_ml"
+  fass_ml:
+    checkpoint_path: "../WindowsNoEditor/PythonAPI/fass_checkpoints/best_model.pt"
+
+scenario:
+  type: "empty"
+  name: "empty_exploration"
+  duration_seconds: 60
+
+logging:
+  output_dir: "logs/fass_integration_runs"
+  level: "INFO"
+  save_replay: true

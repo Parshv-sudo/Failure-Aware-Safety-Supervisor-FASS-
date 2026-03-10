@@ -1,0 +1,5 @@
+FATAL EXCEPTION in main loop:
+Traceback (most recent call last):
+  File "main.py", line 337, in main
+    ctrl = carla.VehicleControl()
+NameError: name 'carla' is not defined

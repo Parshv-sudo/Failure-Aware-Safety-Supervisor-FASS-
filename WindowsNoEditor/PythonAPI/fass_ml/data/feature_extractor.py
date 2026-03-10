@@ -161,7 +161,9 @@ def extract_features(
         # No objects — use safe defaults
         feat[0] = MAX_DISTANCE
         feat[1] = MAX_TTC
-
+        feat[5] = 1.0 # avg_detection_confidence (1.0 = highly certain nothing is there)
+        feat[6] = 1.0 # min_detection_confidence
+        
     # --- Sensor health ---
     cam_ok = float(sensor_health.get('camera_front', True))
     lid_ok = float(sensor_health.get('lidar_roof', True))

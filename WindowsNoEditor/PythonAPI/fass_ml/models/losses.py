@@ -88,8 +88,16 @@ class RiskWeightedLoss(nn.Module):
         high_risk_mask = target > self.high_risk_threshold
         sample_weights[high_risk_mask] = self.high_risk_multiplier
 
+        # --- Baseline anchor penalty ---
+        # If the target is VERY safe (< 0.1) but we predict high, penalize false positives.
+        # This prevents the asymmetric safety penalty from dragging the empty baseline up to 0.5.
+        safe_mask = target < 0.1
+        over_pred = torch.clamp(pred_risk - target, min=0.0)
+        fp_penalty = 2.0 * over_pred ** 2
+        fp_penalty = fp_penalty * safe_mask.float() # only apply to actually safe samples
+
         # --- Combined loss ---
-        per_sample_loss = sample_weights * (nll + fn_penalty)
+        per_sample_loss = sample_weights * (nll + fn_penalty) + fp_penalty
 
         return per_sample_loss.mean()
 

@@ -1,0 +1,27 @@
+# FASS ML Integration Configuration for ADAS Supervision Project
+
+experiment_name: "FASS_Integrated_Test"
+carla:
+  host: "127.0.0.1"
+  port: 2000
+  timeout: 300.0
+
+map:
+  type: "town"
+  name: "Town03"
+
+supervision:
+  risk_model: "fass_ml"
+  fass_ml:
+    checkpoint_path: "../WindowsNoEditor/PythonAPI/fass_checkpoints/best_model.pt"
+    # Ensure these paths are relative to the adas_supervision_project root
+
+scenario:
+  type: "deterministic"
+  name: "highway_cut_in"
+  duration_seconds: 0  # 0 = run infinitely until user presses ESC
+
+logging:
+  output_dir: "logs/fass_integration_runs"
+  level: "INFO"
+  save_replay: true
